@@ -46,6 +46,7 @@ export default function View() {
 
   return (
     <div>
+      <h2> 토스트 메뉴 상세 페이지</h2>
       <dl>
         <dt>{toast?.imgUrl}</dt>
         <dd>{toast?.toastName}</dd>

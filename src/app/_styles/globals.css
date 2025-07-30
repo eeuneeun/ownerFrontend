@@ -57,7 +57,7 @@ a {
   left: 0;
   width: 100%;
   height: 50px;
-  background: #171717;
+  background: #61a8cf;
   justify-content: center;
   align-items: center;
 }
@@ -65,7 +65,7 @@ a {
   font-size: 20px;
   color: #fff;
 }
-.header a.cart {
+.header a.mypage {
   position: absolute;
   right: 15px;
   top: 15px;
@@ -137,21 +137,62 @@ a {
 .board .list > li:nth-child(5) {
   width: 20%;
 }
+/* fixed-status */
+.fixed-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  width: 90%;
+  padding-top: 15px;
+}
+.fixed-status li {
+  width: 23%;
+  height: 100px;
+  border: 1px solid #61a8cf;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+.fixed-status li a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+.fixed-status li a span {
+  font-size: 15px;
+  color: #61a8cf;
+  display: inline-block;
+}
+
+.fixed-status li a .count {
+  font-size: 25px;
+  font-weight: 700;
+}
 
 /* 1. main */
 .main {
+  width: 100%;
+  padding: 15px 0;
+}
+.main ul,
+.main ul li {
   width: 100%;
 }
 .main a {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 500px;
+  width: 100%;
   font-size: 20px !important;
   border-radius: 5px;
   background: #ffffff;
-  padding: 5px 0;
-  margin: 10px;
+  padding: 15px 0;
+  margin: 10px 0;
   gap: 15px;
 }
 .main ul li dt {
@@ -159,8 +200,21 @@ a {
   font-weight: 600;
 }
 
-.main ul li dd {
-  font-size: 15px;
+.main ul li dd span {
+  display: inline-block;
+  font-size: 17px;
+  width: 80px;
+}
+.main ul li dd span:last-child {
+  width: 180px;
+}
+.main .status {
+  width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
 }
 .main button {
   width: 100px;
@@ -199,9 +253,16 @@ button.no {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 .toast ol li {
   width: 150px;
+  background: #fff;
+  padding: 15px;
+}
+.toast ol li img {
+  width: 110px;
 }
 .toast ol li dt {
   font-size: 20px;

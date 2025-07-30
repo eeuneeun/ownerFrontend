@@ -38,6 +38,7 @@ export default function Toast() {
   return (
     <>
       <div className="toast">
+        <h2>토스트 메뉴 리스트</h2>
         <ol>
           {Array.isArray(list) &&
             list.map((item, index) => (

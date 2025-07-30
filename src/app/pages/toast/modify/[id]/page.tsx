@@ -76,7 +76,7 @@ export default function Modify() {
 
   return (
     <div>
-      <h2>수정하기</h2>
+      <h2>토스트 메뉴 수정</h2>
       <form action="post" onSubmit={handleSubmit(onSubmit)}>
         <div>
           <input

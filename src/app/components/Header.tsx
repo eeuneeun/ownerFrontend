@@ -7,8 +7,8 @@ export default function Header({}: Props) {
   return (
     <div className="header">
       <Link href="/">EUN TOAST</Link>
-      <Link href="/pages/cart" className="cart">
-        장바구니
+      <Link href="/pages/mypage" className="mypage">
+        마이페이지
       </Link>
     </div>
   );

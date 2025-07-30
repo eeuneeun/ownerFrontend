@@ -45,7 +45,7 @@ export default function Write({}: ItemContents) {
 
   return (
     <div className="write">
-      <h2>상품 등록</h2>
+      <h2>토스트 메뉴 등록</h2>
       <form action="post" onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="toastName">
           상품명
