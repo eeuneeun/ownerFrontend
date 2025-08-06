@@ -15,9 +15,10 @@
     "@mui/x-data-grid": "^8.9.1",
     "next": "15.3.5",
     "react": "^19.0.0",
+    "react-daum-postcode": "^3.2.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.61.1",
-    "zustand": "^5.0.6"
+    "zustand": "^5.0.7"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

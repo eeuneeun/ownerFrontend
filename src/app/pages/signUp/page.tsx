@@ -9,12 +9,16 @@ type User = {
   name: string;
   email: string;
   nickname: string;
+  storeName: string;
+  storeAddress: string;
+  ownerName: string;
+  ownerPhone: number;
 };
 export default function SignUp() {
   const router = useRouter();
 
   const addItem = async (data: User) => {
-    const res = await fetch("http://localhost:4000/user", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/new`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -88,6 +92,42 @@ export default function SignUp() {
         </label>
         <button>가입</button>
       </form>
+      {/* 
+      <form method="post" onSubmit={handleSubmit(onSubmit)}>
+        <label htmlFor="storeName">
+          점포 이름
+          <input
+            type="text"
+            id="storeName"
+            {...register("storeName", { required: true })}
+          />
+        </label>
+        <label htmlFor="storeAddress">
+          가게 주소
+          <input
+            type="text"
+            id="storeAddress"
+            {...register("storeAddress", { required: true })}
+          />
+        </label>
+        <label htmlFor="ownerName">
+          대표자명
+          <input
+            type="text"
+            id="ownerName"
+            {...register("ownerName", { required: true })}
+          />
+        </label>
+        <label htmlFor="ownerPhone">
+          대표자 연락처
+          <input
+            type="phone"
+            id="ownerPhone"
+            {...register("ownerPhone", { required: true })}
+          />
+        </label>
+        <button>가입</button>
+      </form> */}
     </div>
   );
 }

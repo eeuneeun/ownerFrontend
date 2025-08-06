@@ -4,7 +4,6 @@ import "./_styles/reset.css";
 import "./_styles/globals.css";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
-import FixedStatus from "./components/FixedStatus";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,7 +30,6 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <div className="inner">
           <Header />
-          <FixedStatus />
           {children}
           <Nav />
         </div>
