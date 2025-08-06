@@ -8,7 +8,7 @@ import React, { useEffect } from "react";
 
 type Props = {};
 
-export default function Store({}: Props) {
+export default function StoreView({}: Props) {
   const router = useRouter();
   const { user, accessToken } = useAuthStore();
   const { storeId } = useStoreStore();

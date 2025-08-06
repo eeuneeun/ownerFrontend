@@ -11,7 +11,10 @@ export default function Nav({}: Props) {
           <Link href="/">home</Link>
         </li>
         <li>
-          <Link href="/pages/toast">toast</Link>
+          <Link href="/pages/store">store</Link>
+        </li>
+        <li>
+          <Link href="/pages/menu">menu</Link>
         </li>
         <li>
           <Link href="/pages/order">order</Link>
