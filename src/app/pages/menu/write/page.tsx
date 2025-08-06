@@ -6,10 +6,11 @@ import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 type ItemContents = {
-  id: number;
-  toastName: string;
-  description: string;
+  category: string;
+  name: string;
+  desc: string;
   imgUrl: string;
+  price: string;
 };
 
 export default function Write({}: ItemContents) {
@@ -17,19 +18,26 @@ export default function Write({}: ItemContents) {
   const { user, accessToken } = useAuthStore();
 
   const addItem = async (data: ItemContents) => {
-    const res = await fetch("http://localhost:4000/toast", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/1/toast`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
-        toastName: data.toastName,
-        description: data.description,
-        imgUrl: data.imgUrl,
-        writeTime: new Date(),
-        like: 0,
+        category: data.category,
+        name: data.name,
+        desc: data.desc,
+        price: data.price,
+        imgUrl: "C://example.toast/ham",
       }),
     });
+
+    const result = await res.json();
+    console.log(result);
+
     if (res.status == 201) {
-      router.push("../nomal");
+      router.push("../menu");
     }
   };
 
@@ -53,20 +61,29 @@ export default function Write({}: ItemContents) {
     <div className="write">
       <h2>토스트 메뉴 등록</h2>
       <form action="post" onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="toastName">
+        <label htmlFor="category">
+          카테고리
+          <input
+            type="text"
+            id="category"
+            {...register("category", { required: true })}
+          />
+        </label>
+        <label htmlFor="name">
           상품명
           <input
             type="text"
-            id="toastName"
-            {...register("toastName", { required: true })}
+            id="name"
+            {...register("name", { required: true })}
           />
         </label>
-        <label htmlFor="description">
+        <label htmlFor="desc">
           상품 설명
-          <textarea
-            id="description"
-            {...register("description", { required: true })}
-          />
+          <textarea id="desc" {...register("desc", { required: true })} />
+        </label>
+        <label htmlFor="price">
+          가격
+          <textarea id="price" {...register("price", { required: true })} />
         </label>
         <label htmlFor="imgUrl">
           상품 이미지

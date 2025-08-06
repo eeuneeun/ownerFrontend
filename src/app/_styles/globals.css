@@ -251,15 +251,28 @@ button.no {
 }
 
 /* toast */
+.toast {
+  max-width: 900px;
+  width: 100%;
+  padding: 10px;
+}
+.toast-wrap {
+  width: 100%;
+}
+.toast-list {
+  width: 100%;
+  margin-top: 15px;
+}
 .toast ol {
   display: flex;
-  gap: 10px;
+
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 0 15px;
 }
 .toast ol li {
-  width: 150px;
+  width: 32%;
   background: #fff;
   padding: 15px;
 }
@@ -334,4 +347,77 @@ button.no {
   align-items: center;
   justify-content: center;
   color: #fff;
+}
+
+/* store */
+.store {
+  width: 100%;
+  padding: 10px;
+}
+.store-wrap {
+  width: 100%;
+}
+.store-list {
+  width: 100%;
+  margin-top: 15px;
+}
+.store-list li {
+  width: 100%;
+  background: #fff;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #d0d0d0;
+}
+.store-list li img {
+  width: 100%;
+}
+.store-list li dt {
+  width: 100%;
+  font-size: 20px;
+  font-weight: 600;
+  color: #626262;
+  padding: 10px;
+  position: relative;
+}
+.store-list li dt::after {
+  position: absolute;
+  content: "";
+  display: block;
+  width: 4px;
+  height: 50%;
+  top: 13px;
+  left: 0;
+  background: #626262;
+}
+.store-list li dd {
+  width: 100%;
+  font-size: 17px;
+  padding: 3px 0 0 10px;
+}
+.store-list li .btn-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+.store-list li .view-btn {
+  background: #61a8cf;
+  color: #fff;
+}
+.store-list li .modify-btn {
+  background: #328491;
+  color: #fff;
+}
+
+.add-btn {
+  width: 100%;
+  background: #4d9b85;
+  color: #fff !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  border-radius: 5px;
+  font-size: 16px;
 }
