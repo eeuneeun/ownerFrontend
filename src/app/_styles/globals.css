@@ -459,3 +459,12 @@ button.no {
 .option h3 {
   display: none;
 }
+.option .add-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 25px;
+  position: fixed;
+  bottom: 100px;
+  right: 50px;
+}

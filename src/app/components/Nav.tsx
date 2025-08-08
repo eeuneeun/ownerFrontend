@@ -17,10 +17,10 @@ export default function Nav({}: Props) {
           <Link href="/pages/menu">menu</Link>
         </li>
         <li>
-          <Link href="/pages/order">order</Link>
+          <Link href="/pages/option">option</Link>
         </li>
         <li>
-          <Link href="/pages/mypage">mypage</Link>
+          <Link href="/pages/order">order</Link>
         </li>
       </ul>
     </div>

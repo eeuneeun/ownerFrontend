@@ -6,9 +6,7 @@ export default function OptionItems({ activetab }: Props) {
   return (
     <div className={`option ${activetab == "option" ? "active" : ""}`}>
       <h3>OptionItems</h3>
-      <div className="btn-wrap">
-        <button>옵션 추가</button>
-      </div>
+      <button className="add-btn">+</button>
       <ol className="toast-list">
         <li>
           <img src="http://localhost:3000/option_icons/pickle.png" alt="피클" />
