@@ -3,15 +3,17 @@
 import { useAuthStore } from "@/app/_store/authStore";
 import { useStoreStore } from "@/app/_store/storeStore";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 type Props = {};
 
 export default function StoreView({}: Props) {
   const router = useRouter();
   const { user, accessToken } = useAuthStore();
-  const { storeId } = useStoreStore();
+  const [storeInfo, setStoreInfo] = useState();
+  const searchParams = useSearchParams();
+  const storeId = searchParams.get("id");
 
   async function getStoreInfo() {
     const res = await fetch(
@@ -26,6 +28,7 @@ export default function StoreView({}: Props) {
     );
     const result = await res.json();
     console.log(result);
+    setStoreInfo(result);
   }
   useEffect(() => {
     getStoreInfo();
@@ -41,8 +44,11 @@ export default function StoreView({}: Props) {
         <ul>
           <li>
             <dl>
-              <dt>신대방 삼거리점</dt>
-              <dd>서울시 동작구 신대방동 어쩌구</dd>
+              <dt>{storeInfo?.storeName}</dt>
+              <dd>{storeInfo?.address}</dd>
+              <dd>{storeInfo?.postNum}</dd>
+              <dd>{storeInfo?.businessNum}</dd>
+              <dd>{storeInfo?.phone}</dd>
             </dl>
           </li>
         </ul>

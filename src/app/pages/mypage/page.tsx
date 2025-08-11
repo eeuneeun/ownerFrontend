@@ -1,6 +1,16 @@
+"use client";
+import { useAuthStore } from "@/app/_store/authStore";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function MyPage() {
+  const router = useRouter();
+  const { logout } = useAuthStore();
+
+  function signOut() {
+    logout();
+    router.push("/");
+  }
   return (
     <div className="mypage">
       <h2>마이 페이지</h2>
@@ -21,6 +31,9 @@ export default function MyPage() {
           </li>
           <li>
             <Link href="/pages/mypage/order">주문내역</Link>
+          </li>
+          <li>
+            <button onClick={signOut}>로그아웃</button>
           </li>
         </ul>
       </div>

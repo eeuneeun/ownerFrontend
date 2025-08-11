@@ -18,7 +18,7 @@ export default function SignUp() {
   const router = useRouter();
 
   const addItem = async (data: User) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/new`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

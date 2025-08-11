@@ -14,15 +14,17 @@ import { persist, StateStorage } from "zustand/middleware";
 //       };
 
 interface User {
-  id: string;
-  name: string;
-  // email: string;
+  userId: string;
+  userName: string;
+  email: string | null;
+  nickname: string;
 }
 
 interface AuthState {
   accessToken: string | null;
+  refreshToken: string | null;
   user: User | null;
-  login: (token: string, user: User) => void;
+  login: (acctoken: string, reftoken: string, user: User) => void;
   logout: () => void;
   setToken: (token: string | null) => void;
 }
@@ -31,12 +33,14 @@ export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
       accessToken: null,
+      refreshToken: null,
       user: null,
 
       // 로그인 시 토큰과 유저 정보 저장
-      login: (token, user) =>
+      login: (acctoken, reftoken, user) =>
         set(() => ({
-          accessToken: token,
+          accessToken: acctoken,
+          refreshToken: reftoken,
           user,
         })),
 
@@ -44,6 +48,7 @@ export const useAuthStore = create<AuthState>()(
       logout: () =>
         set(() => ({
           accessToken: null,
+          refreshToken: null,
           user: null,
         })),
 

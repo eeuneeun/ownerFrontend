@@ -3,10 +3,10 @@ import { useAuthStore } from "@/app/_store/authStore";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import DaumPostcodeEmbed from "react-daum-postcode";
+import DaumPostcodeEmbed, { Address } from "react-daum-postcode";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-type ItemContents = {
+type createStoreType = {
   storeName: string;
   userId: number;
   businessNum: string;
@@ -19,26 +19,36 @@ type ItemContents = {
   image: string;
 };
 
-export default function Write({}: ItemContents) {
+export default function Write({}) {
   const router = useRouter();
   const { user, accessToken } = useAuthStore();
+  const [address, setAddress] = useState("");
+  const [postCode, setPostCode] = useState("");
 
-  // data: ItemContents
-  const addStore = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/store/new`, {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<createStoreType>();
+
+  // 가게 추가 API 호출
+  const addStore = async (data: createStoreType) => {
+    console.log("111");
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/store`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        storeName: "신대방삼거리점",
-        userId: user?.id,
-        businessNum: "070-1234-5678",
-        address: "서울특별시 동작구 어딘가",
-        postNum: "06234",
-        description: "인터넷 카페입니다.",
-        phone: "02-1234-5678",
+        storeName: data.storeName,
+        userId: user?.userId,
+        businessNum: data.businessNum,
+        address: address,
+        postNum: postCode,
+        description: data.description,
+        phone: data.phone,
         lat: 43.535,
         longti: 114.55,
         image: "https://internet.com",
@@ -51,21 +61,44 @@ export default function Write({}: ItemContents) {
     }
   };
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<ItemContents>();
+  // Form 제출
+  const onSubmit: SubmitHandler<createStoreType> = (data: createStoreType) => {
+    console.log(data);
+    addStore(data);
+  };
 
-  const onSubmit: SubmitHandler<ItemContents> = (data) => {
-    // console.log(data);
-    addStore();
+  // 주소 찾기
+  const handleComplete = (data: Address) => {
+    // 도로명 주소
+    let fullAddress = data.address;
+    let extraAddress = "";
+
+    // 참고항목 (법정동, 건물명 등)
+    if (data.addressType === "R") {
+      if (data.bname) {
+        extraAddress += data.bname;
+      }
+      if (data.buildingName) {
+        extraAddress += extraAddress
+          ? `, ${data.buildingName}`
+          : data.buildingName;
+      }
+      fullAddress += extraAddress ? ` (${extraAddress})` : "";
+    }
+
+    setAddress(fullAddress);
+    setPostCode(data.zonecode);
+    // console.log("우편번호:", data.zonecode);
+    // console.log("주소:", fullAddress);
   };
 
   useEffect(() => {
-    console.log(user?.id, user?.name, accessToken);
+    console.log(user?.userId, user?.userName, accessToken);
   }, []);
+
+  useEffect(() => {
+    console.log(address);
+  }, [address]);
 
   return (
     <div className="write">
@@ -91,21 +124,13 @@ export default function Write({}: ItemContents) {
         {/* 주소 API / 위도 & 경도 값 내부 작업 */}
         <label htmlFor="address">
           점포 주소
-          <input
-            type="phone"
-            id="address"
-            {...register("address", { required: true })}
-          />
+          <input type="text" id="address" value={address} readOnly />
         </label>
         <label htmlFor="postNum">
           우편번호
-          <input
-            type="text"
-            id="postNum"
-            {...register("postNum", { required: true })}
-          />
+          <input type="text" id="postNum" value={postCode} readOnly />
         </label>
-        <DaumPostcodeEmbed />
+        <DaumPostcodeEmbed onComplete={handleComplete} />
 
         <label htmlFor="description">
           점포 설명

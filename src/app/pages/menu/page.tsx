@@ -18,17 +18,15 @@ export default function Toast() {
 
   // 데이터 불러오기
   async function getToastList() {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/toast/names`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/menu`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    });
     const data = await response.json();
+    console.log(data);
     setList(data);
   }
 

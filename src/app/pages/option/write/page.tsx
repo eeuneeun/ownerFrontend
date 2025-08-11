@@ -59,7 +59,7 @@ export default function Write({}: ItemContents) {
 
   return (
     <div className="write">
-      <h2>토스트 메뉴 등록</h2>
+      <h2>메뉴 옵션 등록</h2>
       <form action="post" onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="category">
           카테고리

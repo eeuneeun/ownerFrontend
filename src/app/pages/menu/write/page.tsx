@@ -18,13 +18,15 @@ export default function Write({}: ItemContents) {
   const { user, accessToken } = useAuthStore();
 
   const addItem = async (data: ItemContents) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/1/toast`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/menu`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        userId: "aaaa",
+        storeId: 3,
         category: data.category,
         name: data.name,
         desc: data.desc,
@@ -62,12 +64,15 @@ export default function Write({}: ItemContents) {
       <h2>토스트 메뉴 등록</h2>
       <form action="post" onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="category">
-          카테고리
-          <input
-            type="text"
-            id="category"
-            {...register("category", { required: true })}
-          />
+          <label htmlFor="category">카테고리 선택</label>
+          <select id="category" {...register("category")}>
+            <option value="">선택하세요</option>
+            <option value="toast">토스트</option>
+            <option value="side">사이드</option>
+            <option value="sandwich">샌드위치</option>
+            <option value="bevarage">음료수</option>
+            <option value="coffee">커피</option>
+          </select>
         </label>
         <label htmlFor="name">
           상품명

@@ -18,28 +18,27 @@ export default function SignIn() {
   const { login } = useAuthStore();
 
   const signin = async (data: User) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/login`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/signin`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        email: data.email,
+        userId: data.userId,
         password: data.password,
       }),
     });
     const result = await res.json();
-    //accessToken
-    //refreshToken
-    //userName
-    //userId
+
+    console.log("result", result);
 
     const userData = {
-      id: result.userId,
-      name: result.userName,
+      userId: result.userInfo.userId,
+      userName: result.userInfo.userName,
+      email: result.userInfo?.email,
+      nickname: result.userInfo.nickname,
     };
 
-    if (res.status == 201) {
-      login(result.accessToken, userData);
-
+    if (res.status == 200) {
+      login(result.accessToken, result.refreshToken, userData);
       router.push("/");
     }
   };
@@ -59,12 +58,12 @@ export default function SignIn() {
     <div className="sign-in">
       <h2>로그인</h2>
       <form action="post" onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="email">
+        <label htmlFor="userId">
           ID
           <input
-            type="email"
-            id="email"
-            {...register("email", { required: true })}
+            type="text"
+            id="userId"
+            {...register("userId", { required: true })}
           />
         </label>
         <label htmlFor="password">
