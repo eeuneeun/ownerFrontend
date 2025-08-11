@@ -55,9 +55,7 @@ export default function Write({}: ItemContents) {
     addItem(data);
   };
 
-  useEffect(() => {
-    console.log(user?.id, user?.name, accessToken);
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <div className="write">

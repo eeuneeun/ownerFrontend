@@ -289,6 +289,28 @@ button.no {
 .toast ol li dd:last-child {
   font-size: 15px;
 }
+
+/* toast view */
+.toast.view {
+  flex-direction: column;
+}
+
+.toast.view .view-wrap,
+.toast.view .view-wrap > * {
+  width: 100%;
+}
+
+.toast.view .view-wrap img {
+  width: 100%;
+}
+
+.toast.view .view-wrap dl dt {
+  font-size: 25px;
+}
+.toast.view .view-wrap dl dd {
+  font-size: 20px;
+}
+
 /* order */
 .order {
   width: 100%;
@@ -419,13 +441,68 @@ button.no {
   color: #fff;
 }
 
+/* store view */
+.store.view {
+  width: 100%;
+}
+.store.view > div,
+.store.view div ul,
+.store.view div ul li,
+.store.view div ul dl,
+.store.view div ul dl dt,
+.store.view div ul dl dd {
+  width: 100%;
+}
+.store.view > div {
+  padding: 10px 15px;
+}
+
+.store.view img {
+  width: 100%;
+}
+
+.store.view div ul dl dt {
+  font-size: 25px;
+  font-weight: 600;
+  color: #838383;
+}
+.store.view div ul dl dd {
+  font-size: 20px;
+  padding: 2.5px 0;
+}
+
 /* btn-wrap */
+
 .btn-wrap {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 5px;
   margin: 5px 0;
+}
+
+.list-btn {
+  width: 100%;
+  background: #4d9b85;
+  color: #fff !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.modify-btn {
+  width: 100%;
+  background: #7d9b4d;
+  color: #fff !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
 }
 
 .add-btn {

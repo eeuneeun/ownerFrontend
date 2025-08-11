@@ -37,18 +37,18 @@ export default function StoreView({}: Props) {
   }, []);
 
   return (
-    <div className="store">
+    <div className="store view">
       <h2>내 가게</h2>
       <div>
-        <Link href="/pages/store/write">가게 등록</Link>
         <ul>
           <li>
+            <img src={storeInfo?.image} alt={storeInfo.storeName} />
             <dl>
               <dt>{storeInfo?.storeName}</dt>
-              <dd>{storeInfo?.address}</dd>
-              <dd>{storeInfo?.postNum}</dd>
-              <dd>{storeInfo?.businessNum}</dd>
-              <dd>{storeInfo?.phone}</dd>
+              <dd>주소지 : {storeInfo?.address}</dd>
+              <dd>우편번호 : {storeInfo?.postNum}</dd>
+              <dd>사업자 번호 : {storeInfo?.businessNum}</dd>
+              <dd>대표 번호 : {storeInfo?.phone}</dd>
             </dl>
           </li>
         </ul>

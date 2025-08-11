@@ -54,7 +54,7 @@ export default function Write({}: ItemContents) {
   };
 
   useEffect(() => {
-    console.log(user?.id, user?.name, accessToken);
+    console.log(user?.userId, user?.userName, accessToken);
   }, []);
 
   return (

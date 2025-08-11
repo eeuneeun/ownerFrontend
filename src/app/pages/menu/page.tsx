@@ -5,7 +5,7 @@ import { Pagination } from "@mui/material";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 type Toast = {
-  id: number;
+  menuId: number;
   category: string;
   name: string;
   desc: string;
@@ -44,9 +44,6 @@ export default function Toast() {
             <Link href={"./menu/write"} className="add-btn">
               메뉴 추가
             </Link>
-            <Link href={"./option"} className="add-btn">
-              옵션 관리
-            </Link>
           </div>
           <ol className="toast-list">
             {Array.isArray(list) &&
@@ -54,8 +51,8 @@ export default function Toast() {
                 <li key={item.name + index}>
                   <Link
                     href={{
-                      pathname: `./toast/view/${item.id}`,
-                      query: { id: item.id, ref: "home" },
+                      pathname: `./menu/view/${item.menuId}`,
+                      query: { id: item.menuId, ref: "menu" },
                     }}
                   >
                     <img
