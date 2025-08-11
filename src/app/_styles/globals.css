@@ -460,7 +460,9 @@ button.no {
 .store.view img {
   width: 100%;
 }
-
+.store.view div ul dl {
+  padding: 10px 0;
+}
 .store.view div ul dl dt {
   font-size: 25px;
   font-weight: 600;
@@ -517,6 +519,11 @@ button.no {
   font-size: 16px;
 }
 
+.tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .tab-btn {
   width: 100%;
   display: flex;
@@ -527,6 +534,7 @@ button.no {
   color: #626262;
   padding: 15px;
   background: transparent;
+  cursor: pointer;
 }
 .tab-btn.active {
   border-bottom: 3px solid #909090;
