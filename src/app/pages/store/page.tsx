@@ -76,7 +76,15 @@ export default function Store({}: Props) {
                   >
                     보기
                   </Link>
-                  <button className="modify-btn">수정</button>
+                  <Link
+                    href={{
+                      pathname: `./store/modify/${item.id}`,
+                      query: { id: item.id, ref: "store" },
+                    }}
+                    className="modify-btn"
+                  >
+                    수정
+                  </Link>
                 </div>
               </li>
             ))

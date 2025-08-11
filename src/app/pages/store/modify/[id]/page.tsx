@@ -68,35 +68,46 @@ export default function Modify() {
     const result = await res.json();
     console.log(result);
     setStoreInfo(result);
+    setAddress(result.address);
+    setPostCode(result.postNum);
   }
 
   const delStoreInfo = async () => {
-    const id = searchParams.get("id");
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/board/${id}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/store/${storeId}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
     console.log(res);
+    if (res.status == 204) {
+      router.push("../");
+    }
   };
 
   async function updateStoreInfo(data: StoreType) {
     const id = searchParams.get("id");
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/board/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/store/${id}`, {
       method: "PUT",
       headers: {
+        Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        address: data.address,
+        address: address,
         businessNum: data.businessNum,
         created_at: data.created_at,
         description: data.description,
         id: data.id,
-        image: data.image,
+        image: "/combi.jpg",
         lat: data.lat,
         longti: data.longti,
         phone: data.phone,
-        postNum: data.postNum,
+        postNum: postCode,
         storeName: data.storeName,
       }),
     });
@@ -114,6 +125,7 @@ export default function Modify() {
   } = useForm<StoreType>();
 
   const onSubmit: SubmitHandler<StoreType> = (data) => {
+    console.log(data);
     updateStoreInfo(data);
   };
 
@@ -122,7 +134,7 @@ export default function Modify() {
   }, []);
 
   return (
-    <div>
+    <div className="write">
       <h2>토스트 메뉴 수정</h2>
       <form action="post" onSubmit={handleSubmit(onSubmit)}>
         <div>
@@ -142,6 +154,7 @@ export default function Modify() {
             <input
               type="phone"
               id="businessNum"
+              defaultValue={storeInfo?.businessNum}
               {...register("businessNum", { required: true })}
             />
           </label>
@@ -157,11 +170,12 @@ export default function Modify() {
         </label>
         <DaumPostcodeEmbed onComplete={handleComplete} />
 
-        <label htmlFor="description">
+        <label htmlFor="desc">
           점포 설명
           <input
             type="text"
             id="description"
+            defaultValue={storeInfo?.description}
             {...register("description", { required: true })}
           />
         </label>
@@ -170,6 +184,7 @@ export default function Modify() {
           <input
             type="text"
             id="phone"
+            defaultValue={storeInfo?.phone}
             {...register("phone", { required: true })}
           />
         </label>
@@ -179,13 +194,20 @@ export default function Modify() {
           <input
             type="file"
             id="image"
+            defaultValue={storeInfo?.image}
             {...register("image", { required: true })}
           />
         </label>
-        <Link href="../../nomal">글목록</Link>
-        <a onClick={() => delStoreInfo()}>글삭제</a>
         <input type="submit" />
       </form>
+      <div className="btn-wrap">
+        <Link href="../../nomal" className="list-btn">
+          글목록
+        </Link>
+        <a onClick={() => delStoreInfo()} className="del-btn">
+          글삭제
+        </a>
+      </div>
     </div>
   );
 }

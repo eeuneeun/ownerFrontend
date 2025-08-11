@@ -45,7 +45,7 @@ export default function Order({}: Props) {
       </ul>
       <ol>
         {list.map((item, idx) => (
-          <li className="flex-center" key={item + idx}>
+          <li className="flex-center relative" key={item + idx}>
             <img src="/combi.jpg" alt="기본 토스트" />
             <dl>
               <dt>기본 토스트</dt>
@@ -54,6 +54,7 @@ export default function Order({}: Props) {
               </dd>
               <dd>2025년 7월 30일 10:10</dd>
             </dl>
+            <span className="badge">조리중</span>
           </li>
         ))}
       </ol>
