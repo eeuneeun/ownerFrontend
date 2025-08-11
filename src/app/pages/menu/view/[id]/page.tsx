@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 type Toast = {
-  id: number;
+  menuId: number;
   imgUrl: string;
   name: string;
   desc: string;
@@ -20,7 +20,7 @@ export default function View() {
   const { user, accessToken } = useAuthStore();
 
   const [toast, setToast] = useState({
-    id: 1,
+    menuId: 1,
     name: "",
     desc: "",
     price: 0,
@@ -76,8 +76,8 @@ export default function View() {
           </Link>
           <Link
             href={{
-              pathname: `/pages/nomal/modify/${toast.id}`,
-              query: { id: toast.id, ref: "home" },
+              pathname: `../modify/${toast.menuId}`,
+              query: { id: toast.menuId, ref: "home" },
             }}
             className="modify-btn"
           >
