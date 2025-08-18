@@ -8,7 +8,7 @@ type Toast = {
   menuId: number;
   category: string;
   name: string;
-  desc: string;
+  des: string;
   imgUrl: string;
   price: string;
 };
@@ -62,7 +62,7 @@ export default function Toast() {
                     <dl>
                       <dt>{item.name}</dt>
                       <dd>{item.price}원</dd>
-                      <dd> {item.desc}</dd>
+                      <dd> {item.des}</dd>
                     </dl>
                   </Link>
                 </li>

@@ -184,17 +184,38 @@ a {
 .main ul li {
   width: 100%;
 }
-.main a {
+.main ul li {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  border-radius: 5px;
+  background: #ffffff;
+
+  margin: 10px 0;
+}
+.main a {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   font-size: 20px !important;
   border-radius: 5px;
   background: #ffffff;
   padding: 15px 0;
-  margin: 10px 0;
   gap: 15px;
+}
+.main a img {
+  width: 100px;
+  border-radius: 5px;
+}
+.main .status {
+  width: 20%;
+  gap: 0;
+}
+.main .status li {
+  margin: 0;
+  padding: 0;
 }
 .main ul li dt {
   font-size: 20px;
@@ -221,13 +242,26 @@ a {
   width: 100px;
   color: #fff;
 }
+
+/* button */
 button.ok {
   background: #61a8cf;
 }
 button.no {
-  background: #9b4d4d;
+  background: #d15e5e;
 }
-
+button.cook {
+  background: #d6b918;
+}
+button.delivery {
+  background: #8cd15e;
+}
+button.completed {
+  background: #3ea9f0;
+}
+button.cancel {
+  background: #d15e5e;
+}
 .auth a {
   width: 240px;
   background: #8edf70;
@@ -268,8 +302,9 @@ button.no {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 0 15px;
+  gap: 5px;
 }
 .toast ol li {
   width: 32%;
@@ -529,7 +564,6 @@ button.no {
   border-radius: 5px;
   font-size: 16px;
 }
-
 /* tab */
 .tab {
   display: flex;

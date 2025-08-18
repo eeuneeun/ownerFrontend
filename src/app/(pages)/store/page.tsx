@@ -52,7 +52,7 @@ export default function Store({}: Props) {
     <div className="store">
       <h2>내 가게</h2>
       <div className="store-wrap">
-        <Link href="/pages/store/write" className="add-btn">
+        <Link href="/store/write" className="add-btn">
           가게 등록
         </Link>
         <ul className="store-list">

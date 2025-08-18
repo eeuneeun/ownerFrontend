@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 type Props = { activetab: string };
@@ -6,7 +7,9 @@ export default function OptionItems({ activetab }: Props) {
   return (
     <div className={`option ${activetab == "option" ? "active" : ""}`}>
       <h3>OptionItems</h3>
-      <button className="add-btn">+</button>
+      <Link href="./option/write" className="add-btn">
+        +
+      </Link>
       <ol className="toast-list">
         <li>
           <img src="http://localhost:3000/option_icons/pickle.png" alt="피클" />

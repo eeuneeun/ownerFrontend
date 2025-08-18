@@ -9,7 +9,7 @@ type Toast = {
   menuId: number;
   imgUrl: string;
   name: string;
-  desc: string;
+  des: string;
   price: number;
 };
 
@@ -22,7 +22,7 @@ export default function View() {
   const [toast, setToast] = useState({
     menuId: 1,
     name: "",
-    desc: "",
+    des: "",
     price: 0,
     imgUrl: "",
   });
@@ -65,7 +65,7 @@ export default function View() {
         <dl>
           <dt>{toast?.name}</dt>
 
-          <dd>{toast?.desc}</dd>
+          <dd>{toast?.des}</dd>
           <dd>가격 : {toast?.price}</dd>
           {/* <dd>등록일 : {toast?.createAt}</dd> */}
         </dl>

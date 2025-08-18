@@ -76,7 +76,7 @@ export default function SignIn() {
         </label>
         <button className="login-btn">로그인</button>
       </form>
-      <Link href="/pages/signUp" className="signup-btn">
+      <Link href="/signUp" className="signup-btn">
         회원가입
       </Link>
     </div>

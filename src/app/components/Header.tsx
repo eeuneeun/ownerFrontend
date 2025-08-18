@@ -12,11 +12,11 @@ export default function Header({}: Props) {
     <div className="header">
       <Link href="/">EUN TOAST</Link>
       {user == null ? (
-        <Link href="/pages/signIn" className="mypage">
+        <Link href="/signIn" className="mypage">
           로그인
         </Link>
       ) : (
-        <Link href="/pages/mypage" className="mypage">
+        <Link href="/mypage" className="mypage">
           마이페이지
         </Link>
       )}
