@@ -6,9 +6,40 @@ import Link from "next/link";
 import DateCasting from "./components/DateCasting";
 import { useRouter } from "next/navigation";
 
+export type OrderList = {
+  createdAt: string;
+  customerId: string;
+  customerName: string;
+  customerPhone: string;
+  deliveryAddress: string;
+  deliveryMethod: string;
+  id: number;
+  orderMenus: [
+    {
+      id: number;
+      menu: {
+        category: string;
+        create_at: string;
+        desc: string;
+        id: number;
+        imgUrl: string;
+        name: string;
+        price: number;
+      };
+      quantity: number;
+      totalPrice: number;
+    }
+  ];
+  paymentMethod: string;
+  status: string;
+  storeId: number;
+  totalPrice: number;
+  updatedAt: string;
+};
+
 export default function Home() {
   const router = useRouter();
-  const [orderArr, setOrderArr] = useState([]);
+  const [orderArr, setOrderArr] = useState<OrderList[]>([]);
 
   async function getAllOrder() {
     const res = await fetch(`http://localhost:4000/order/store/${1}`);
@@ -41,12 +72,12 @@ export default function Home() {
   }, []);
   return (
     <>
-      <FixedStatus />
+      <FixedStatus orderArr={orderArr} />
       <div className="main flex-center">
         <ul>
           {orderArr &&
             orderArr.length > 0 &&
-            orderArr.map((item, idx) => {
+            orderArr.map((item: OrderList, idx) => {
               const firstMenu = item?.orderMenus[0]?.menu?.name;
               console.log(firstMenu);
 

@@ -1,9 +1,45 @@
+import { useAuthStore } from "@/app/_store/authStore";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 type Props = { activetab: string };
+type Opition = {
+  id: number;
+  name: string;
+  des: string;
+  imgUrl: string;
+  price: number;
+};
 
 export default function OptionItems({ activetab }: Props) {
+  const [list, setList] = useState<Opition[]>([
+    {
+      id: 1,
+      name: "피클",
+      des: "새콤하고 맛있는 피클",
+      imgUrl: "/banner01.png",
+      price: 500,
+    },
+  ]);
+  const { user, accessToken } = useAuthStore();
+  // 데이터 불러오기
+  async function getOptionList() {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/option`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    console.log(data);
+    setList(data);
+  }
+
+  useEffect(() => {
+    getOptionList();
+  }, [accessToken]);
+
   return (
     <div className={`option ${activetab == "option" ? "active" : ""}`}>
       <h3>OptionItems</h3>
@@ -11,45 +47,25 @@ export default function OptionItems({ activetab }: Props) {
         +
       </Link>
       <ol className="toast-list">
-        <li>
-          <img src="http://localhost:3000/option_icons/pickle.png" alt="피클" />
-          <dl>
-            <dt>피클</dt>
-            <dd>500 원</dd>
-            <dd>새콤달콤 맛있는 피클</dd>
-          </dl>
-          <div className="btn-wrap">
-            <button>수정</button>
-            <button>삭제</button>
-          </div>
-        </li>
-        <li>
-          <img
-            src="http://localhost:3000/option_icons/letuce.png"
-            alt="양상추"
-          />
-          <dl>
-            <dt>양상추</dt>
-            <dd>500 원</dd>
-            <dd>아삭아삭 맛있는 양상추</dd>
-          </dl>
-          <div className="btn-wrap">
-            <button>수정</button>
-            <button>삭제</button>
-          </div>
-        </li>
-        <li>
-          <img src="http://localhost:3000/option_icons/egg.png" alt="달걀" />
-          <dl>
-            <dt>계란 후라이</dt>
-            <dd>500 원</dd>
-            <dd>바삭하고 고소한 맛있는 계란 후라이</dd>
-          </dl>
-          <div className="btn-wrap">
-            <button>수정</button>
-            <button>삭제</button>
-          </div>
-        </li>
+        {Array.isArray(list) &&
+          list.length > 0 &&
+          list.map((item, idx) => (
+            <li key={item.name + idx}>
+              <img
+                src="http://localhost:3000/option_icons/pickle.png"
+                alt={item.name}
+              />
+              <dl>
+                <dt>{item.name}</dt>
+                <dd>{item.price}원</dd>
+                <dd>{item.des}</dd>
+              </dl>
+              <div className="btn-wrap">
+                <button>수정</button>
+                <button>삭제</button>
+              </div>
+            </li>
+          ))}
       </ol>
     </div>
   );

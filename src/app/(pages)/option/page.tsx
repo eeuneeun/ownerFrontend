@@ -6,45 +6,9 @@ import OptionItems from "@/app/components/option/OptionItems";
 import { Pagination } from "@mui/material";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-type Opition = {
-  id: number;
-  name: string;
-  desc: string;
-  imgUrl: string;
-  price: number;
-};
+
 export default function Toast() {
-  const [list, setList] = useState<Opition[]>([
-    {
-      id: 1,
-      name: "피클",
-      desc: "새콤하고 맛있는 피클",
-      imgUrl: "/banner01.png",
-      price: 500,
-    },
-  ]);
-  const { user, accessToken } = useAuthStore();
   const [activeTab, setActiveTab] = useState("option");
-
-  // 데이터 불러오기
-  async function getOptionList() {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/menu/options`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    const data = await response.json();
-    // setList(data);
-  }
-
-  useEffect(() => {
-    getOptionList();
-  }, [accessToken]);
 
   return (
     <>
