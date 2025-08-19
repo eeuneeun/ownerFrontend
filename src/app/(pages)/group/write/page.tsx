@@ -28,10 +28,10 @@ export default function Write({}: ItemContents) {
     });
 
     const result = await res.json();
-    console.log(result);
+    console.log(res);
 
-    if (res.status == 201) {
-      router.push("../menu");
+    if (res.status == 200) {
+      router.push("../option");
     }
   };
 

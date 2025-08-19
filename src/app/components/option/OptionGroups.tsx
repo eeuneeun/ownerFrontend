@@ -4,11 +4,9 @@ import React, { useEffect, useState } from "react";
 
 type Props = { activetab: string };
 type Group = {
-  id: number;
+  id: 1;
   name: string;
   des: string;
-  imgUrl: string;
-  price: number;
 };
 export default function OptionGroups({ activetab }: Props) {
   const [list, setList] = useState<Group[]>([
@@ -16,11 +14,10 @@ export default function OptionGroups({ activetab }: Props) {
       id: 1,
       name: "피클",
       des: "새콤하고 맛있는 피클",
-      imgUrl: "/banner01.png",
-      price: 500,
     },
   ]);
   const { user, accessToken } = useAuthStore();
+
   // 데이터 불러오기
   async function getGroupList() {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/option`, {
@@ -46,17 +43,18 @@ export default function OptionGroups({ activetab }: Props) {
         +
       </Link>
       <ol className="toast-list">
-        <li>
-          <img
-            src="http://localhost:3000/option_icons/pickle.svg"
-            alt="기본 토스트"
-          />
-          <dl>
-            <dt>피클</dt>
-            <dd>500 원</dd>
-            <dd>새콤달콤 맛있는 피클</dd>
-          </dl>
-        </li>
+        {Array.isArray(list) &&
+          list.length > 0 &&
+          list.map((item, idx) => (
+            <li key={item.name + idx}>
+              <Link href={`/group/view/${item.id}`}>
+                <dl>
+                  <dt>{item.name}</dt>
+                  <dd>{item.des}</dd>
+                </dl>
+              </Link>
+            </li>
+          ))}
       </ol>
     </div>
   );
