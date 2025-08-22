@@ -17,7 +17,7 @@ type StoreType = {
   longti: number;
   phone: string;
   postNum: string;
-  storeName: string;
+  name: string;
   updated_at: string;
 };
 export default function Modify() {
@@ -108,7 +108,7 @@ export default function Modify() {
         longti: data.longti,
         phone: data.phone,
         postNum: postCode,
-        storeName: data.storeName,
+        name: data.name,
       }),
     });
 
@@ -138,13 +138,13 @@ export default function Modify() {
       <h2>토스트 메뉴 수정</h2>
       <form action="post" onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <label htmlFor="storeName">
+          <label htmlFor="name">
             점포명
             <input
               type="text"
-              id="storeName"
-              defaultValue={storeInfo?.storeName}
-              {...register("storeName", { required: true })}
+              id="name"
+              defaultValue={storeInfo?.name}
+              {...register("name", { required: true })}
             />
           </label>
         </div>

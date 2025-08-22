@@ -3,23 +3,27 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 type Props = { activetab: string };
-type Group = {
-  id: 1;
+type Opition = {
+  id: number;
   name: string;
-  des: string;
+  desc: string;
+  imgUrl: string;
+  price: number;
 };
-export default function OptionGroups({ activetab }: Props) {
-  const [list, setList] = useState<Group[]>([
+
+export default function OptionItems({ activetab }: Props) {
+  const [list, setList] = useState<Opition[]>([
     {
       id: 1,
       name: "피클",
-      des: "새콤하고 맛있는 피클",
+      desc: "새콤하고 맛있는 피클",
+      imgUrl: "/banner01.png",
+      price: 500,
     },
   ]);
   const { user, accessToken } = useAuthStore();
-
   // 데이터 불러오기
-  async function getGroupList() {
+  async function getOptionList() {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/option`, {
       method: "GET",
       headers: {
@@ -33,13 +37,13 @@ export default function OptionGroups({ activetab }: Props) {
   }
 
   useEffect(() => {
-    getGroupList();
+    getOptionList();
   }, [accessToken]);
 
   return (
-    <div className={`option ${activetab == "group" ? "active" : ""}`}>
-      <h3> OptionGroups</h3>
-      <Link href="./group/write" className="add-btn">
+    <div className={`option ${activetab == "option" ? "active" : ""}`}>
+      <h3>OptionItems</h3>
+      <Link href="./option/write" className="add-btn">
         +
       </Link>
       <ol className="toast-list">
@@ -47,12 +51,19 @@ export default function OptionGroups({ activetab }: Props) {
           list.length > 0 &&
           list.map((item, idx) => (
             <li key={item.name + idx}>
-              <Link href={`/group/view/${item.id}`}>
-                <dl>
-                  <dt>{item.name}</dt>
-                  <dd>{item.des}</dd>
-                </dl>
-              </Link>
+              <img
+                src="http://localhost:3000/option_icons/pickle.png"
+                alt={item.name}
+              />
+              <dl>
+                <dt>{item.name}</dt>
+                <dd>{item.price}원</dd>
+                <dd>{item.desc}</dd>
+              </dl>
+              <div className="btn-wrap">
+                <button>수정</button>
+                <button>삭제</button>
+              </div>
             </li>
           ))}
       </ol>

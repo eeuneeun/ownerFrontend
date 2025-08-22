@@ -18,7 +18,7 @@ export default function SignUp() {
   const router = useRouter();
 
   const addItem = async (data: User) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/signup`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -26,7 +26,6 @@ export default function SignUp() {
         password: data.password,
         name: data.name,
         email: data.email,
-        nickname: data.nickname,
       }),
     });
     if (res.status == 201) {

@@ -8,8 +8,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 type ItemContents = {
   category: string;
   name: string;
-  des: string;
-  optionPrice: number;
+  desc: string;
+  price: number;
   imgUrl: string;
 };
 
@@ -25,10 +25,9 @@ export default function Write({}: ItemContents) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        category: data.category,
         name: data.name,
-        des: data.des,
-        optionPrice: data.optionPrice,
+        desc: data.desc,
+        price: data.price,
         imgUrl: "C://example.toast/ham",
       }),
     });
@@ -37,7 +36,7 @@ export default function Write({}: ItemContents) {
     console.log(result);
 
     if (res.status == 201) {
-      router.push("../menu");
+      router.push("/option");
     }
   };
 
@@ -77,16 +76,13 @@ export default function Write({}: ItemContents) {
             {...register("name", { required: true })}
           />
         </label>
-        <label htmlFor="des">
+        <label htmlFor="desc">
           상품 설명
-          <textarea id="des" {...register("des", { required: true })} />
+          <textarea id="desc" {...register("desc", { required: true })} />
         </label>
-        <label htmlFor="optionPrice">
+        <label htmlFor="price">
           옵션 가격
-          <textarea
-            id="optionPrice"
-            {...register("optionPrice", { required: true })}
-          />
+          <textarea id="price" {...register("price", { required: true })} />
         </label>
         <label htmlFor="imgUrl">
           상품 이미지

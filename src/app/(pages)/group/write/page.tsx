@@ -7,7 +7,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 type ItemContents = {
   name: string;
-  des: string;
+  desc: string;
 };
 
 export default function Write({}: ItemContents) {
@@ -23,14 +23,14 @@ export default function Write({}: ItemContents) {
       },
       body: JSON.stringify({
         name: data.name,
-        des: data.des,
+        desc: data.desc,
       }),
     });
 
     const result = await res.json();
     console.log(res);
 
-    if (res.status == 200) {
+    if (res.status == 201) {
       router.push("../option");
     }
   };
@@ -63,9 +63,9 @@ export default function Write({}: ItemContents) {
             {...register("name", { required: true })}
           />
         </label>
-        <label htmlFor="des">
+        <label htmlFor="desc">
           옵션 그룹 설명
-          <textarea id="des" {...register("des", { required: true })} />
+          <textarea id="desc" {...register("desc", { required: true })} />
         </label>
 
         <input type="submit" />

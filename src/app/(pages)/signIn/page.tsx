@@ -18,7 +18,7 @@ export default function SignIn() {
   const { login } = useAuthStore();
 
   const signin = async (data: User) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/signin`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -31,13 +31,11 @@ export default function SignIn() {
     console.log("result", result);
 
     const userData = {
-      userId: result.userInfo.userId,
-      userName: result.userInfo.userName,
-      email: result.userInfo?.email,
-      nickname: result.userInfo.nickname,
+      userId: result.user.userId,
+      userName: result.user.userName,
     };
 
-    if (res.status == 200) {
+    if (result.status == 200) {
       login(result.accessToken, result.refreshToken, userData);
       router.push("/");
     }

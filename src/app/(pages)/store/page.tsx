@@ -5,6 +5,7 @@ import { useStoreStore } from "@/app/_store/storeStore";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { set } from "react-hook-form";
 
 type Props = {};
 type Store = {
@@ -17,9 +18,9 @@ type Store = {
   lat: number;
   longti: number;
   ownerName: string;
-  phone: string;
+  tel: string;
   postNum: string;
-  storeName: string;
+  name: string;
   updated_at: string;
 };
 
@@ -27,7 +28,7 @@ export default function Store({}: Props) {
   const router = useRouter();
   const [storeList, setStoreList] = useState<Store[] | null>(null);
   const { user, accessToken } = useAuthStore();
-  const { storeId } = useStoreStore();
+  const { setStoreName, setStoreId } = useStoreStore();
 
   async function getStoreInfo() {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/store`, {
@@ -58,13 +59,13 @@ export default function Store({}: Props) {
         <ul className="store-list">
           {Array.isArray(storeList) ? (
             storeList.map((item, idx) => (
-              <li key={item.storeName + idx}>
-                <img src="/common-store.png" alt={item.storeName} />
+              <li key={item.name + idx}>
+                <img src="/common-store.png" alt={item.name} />
                 <dl>
-                  <dt>{item.storeName}</dt>
+                  <dt>{item.name}</dt>
                   <dd>{item.address}</dd>
                   <dd>우편번호 : {item.postNum}</dd>
-                  <dd>대표번호 : {item.phone}</dd>
+                  <dd>대표번호 : {item.tel}</dd>
                 </dl>
                 <div className="btn-wrap">
                   <Link
@@ -85,6 +86,14 @@ export default function Store({}: Props) {
                   >
                     수정
                   </Link>
+                  <button
+                    onClick={() => {
+                      setStoreId(item.id);
+                      setStoreName(item.name);
+                    }}
+                  >
+                    상점선택
+                  </button>
                 </div>
               </li>
             ))

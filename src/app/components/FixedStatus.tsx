@@ -1,9 +1,9 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { OrderList } from "../page";
+import { OrderListItem } from "../page";
 
 type ChildProps = {
-  orderArr: OrderList[];
+  orderArr: OrderListItem[];
 };
 
 export default function FixedStatus({ orderArr }: ChildProps) {

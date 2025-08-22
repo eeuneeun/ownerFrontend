@@ -18,7 +18,7 @@ type StoreType = {
   longti: number;
   phone: string;
   postNum: string;
-  storeName: string;
+  name: string;
   updated_at: string;
 };
 export default function StoreView({}: Props) {
@@ -55,9 +55,9 @@ export default function StoreView({}: Props) {
       <div>
         <ul>
           <li>
-            <img src="/common-store.png" alt={storeInfo?.storeName} />
+            <img src="/common-store.png" alt={storeInfo?.name} />
             <dl>
-              <dt>{storeInfo?.storeName}</dt>
+              <dt>{storeInfo?.name}</dt>
               <dd>주소지 : {storeInfo?.address}</dd>
               <dd>우편번호 : {storeInfo?.postNum}</dd>
               <dd>사업자 번호 : {storeInfo?.businessNum}</dd>

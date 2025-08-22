@@ -7,7 +7,7 @@ import DaumPostcodeEmbed, { Address } from "react-daum-postcode";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 type createStoreType = {
-  storeName: string;
+  name: string;
   userId: number;
   businessNum: string;
   postNum: string;
@@ -42,16 +42,16 @@ export default function Write({}) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        storeName: data.storeName,
         userId: user?.userId,
-        businessNum: data.businessNum,
+        name: data.name,
         address: address,
         postNum: postCode,
-        description: data.description,
-        phone: data.phone,
-        lat: 43.535,
-        longti: 114.55,
-        image: "https://internet.com",
+        businessNum: data.businessNum,
+        desc: data.description,
+        tel: data.phone,
+        // lat: 43.535,
+        // longti: 114.55,
+        imgUrl: "https://internet.com",
       }),
     });
 
@@ -104,12 +104,12 @@ export default function Write({}) {
     <div className="write">
       <h2>내 가게 등록</h2>
       <form action="post" onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="storeName">
+        <label htmlFor="name">
           점포명
           <input
             type="text"
-            id="storeName"
-            {...register("storeName", { required: true })}
+            id="name"
+            {...register("name", { required: true })}
           />
         </label>
         <label htmlFor="businessNum">

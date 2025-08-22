@@ -16,8 +16,6 @@ import { persist, StateStorage } from "zustand/middleware";
 interface User {
   userId: string;
   userName: string;
-  email: string | null;
-  nickname: string;
 }
 
 interface AuthState {

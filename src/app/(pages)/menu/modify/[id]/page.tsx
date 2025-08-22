@@ -8,7 +8,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 type MenuType = {
   category: string;
   name: string;
-  des: string;
+  desc: string;
   imgUrl: string;
   price: number;
 };
@@ -17,7 +17,7 @@ export default function Modify() {
   const [menu, setItems] = useState({
     category: "",
     name: "",
-    des: "",
+    desc: "",
     imgUrl: "",
     price: 0,
   });
@@ -71,7 +71,7 @@ export default function Modify() {
         body: JSON.stringify({
           category: data.category,
           name: data.name,
-          des: data.des,
+          desc: data.desc,
           imgUrl: "/combi.jpg",
           price: data.price,
         }),
@@ -122,12 +122,12 @@ export default function Modify() {
             {...register("name", { required: true })}
           />
         </label>
-        <label htmlFor="des">
+        <label htmlFor="desc">
           상품 설명
           <textarea
-            id="des"
-            defaultValue={menu.des}
-            {...register("des", { required: true })}
+            id="desc"
+            defaultValue={menu.desc}
+            {...register("desc", { required: true })}
           />
         </label>
         <label htmlFor="price">

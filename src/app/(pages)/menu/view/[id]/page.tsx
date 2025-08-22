@@ -9,7 +9,7 @@ type Toast = {
   menuId: number;
   imgUrl: string;
   name: string;
-  des: string;
+  desc: string;
   price: number;
 };
 
@@ -22,13 +22,13 @@ export default function View() {
   const [toast, setToast] = useState({
     menuId: 1,
     name: "",
-    des: "",
+    desc: "",
     price: 0,
     imgUrl: "",
   });
 
   const getItem = async () => {
-    const response = await fetch(`http://localhost:8080/menu/${id}`, {
+    const response = await fetch(`http://localhost:4030/menu/${id}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -37,7 +37,7 @@ export default function View() {
     });
     const data: Toast = await response.json();
     console.log(data);
-    setToast(data);
+    setToast(data[0]);
   };
   const delItem = async () => {
     const res = await fetch(`http://localhost:8080/menu/${id}`, {
@@ -65,7 +65,7 @@ export default function View() {
         <dl>
           <dt>{toast?.name}</dt>
 
-          <dd>{toast?.des}</dd>
+          <dd>{toast?.desc}</dd>
           <dd>가격 : {toast?.price}</dd>
           {/* <dd>등록일 : {toast?.createAt}</dd> */}
         </dl>

@@ -6,7 +6,7 @@ import Link from "next/link";
 import DateCasting from "./components/DateCasting";
 import { useRouter } from "next/navigation";
 
-export type OrderList = {
+export type OrderListItem = {
   createdAt: string;
   customerId: string;
   customerName: string;
@@ -39,7 +39,7 @@ export type OrderList = {
 
 export default function Home() {
   const router = useRouter();
-  const [orderArr, setOrderArr] = useState<OrderList[]>([]);
+  const [orderArr, setOrderArr] = useState<OrderListItem[]>([]);
 
   async function getAllOrder() {
     const res = await fetch(`http://localhost:4000/order/store/${1}`);
@@ -77,13 +77,18 @@ export default function Home() {
         <ul>
           {orderArr &&
             orderArr.length > 0 &&
-            orderArr.map((item: OrderList, idx) => {
+            orderArr.map((item: OrderListItem, idx) => {
               const firstMenu = item?.orderMenus[0]?.menu?.name;
               console.log(firstMenu);
 
               return (
                 <li key={item.createdAt + idx}>
-                  <Link href="/order">
+                  <Link
+                    href={{
+                      pathname: `/order/view/${item.id}`,
+                      query: { id: item.id, ref: "home" },
+                    }}
+                  >
                     <img src="/combi.jpg" alt="메뉴 이미지" />
                     <dl>
                       <dt>주문 번호 &nbsp;&nbsp;&nbsp;{item.id}</dt>

@@ -1,5 +1,6 @@
 "use client";
 import { useAuthStore } from "@/app/_store/authStore";
+import { useStoreStore } from "@/app/_store/storeStore";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -8,14 +9,16 @@ import { SubmitHandler, useForm } from "react-hook-form";
 type ItemContents = {
   category: string;
   name: string;
-  des: string;
+  desc: string;
   imgUrl: string;
   price: string;
+  storeId: number;
 };
 
 export default function Write({}: ItemContents) {
   const router = useRouter();
   const { user, accessToken } = useAuthStore();
+  const { storeId } = useStoreStore();
 
   const addItem = async (data: ItemContents) => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/menu`, {
@@ -25,11 +28,10 @@ export default function Write({}: ItemContents) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        userId: "aaaa",
-        storeId: 3,
+        storeId: storeId,
         category: data.category,
         name: data.name,
-        des: data.des,
+        desc: data.desc,
         price: data.price,
         imgUrl: "C://example.toast/ham",
       }),
@@ -80,12 +82,12 @@ export default function Write({}: ItemContents) {
             {...register("name", { required: true })}
           />
         </label>
-        <label htmlFor="des">
+        <label htmlFor="desc">
           상품 설명
           <input
             type="text"
-            id="des"
-            {...register("des", { required: true })}
+            id="desc"
+            {...register("desc", { required: true })}
           />
         </label>
         <label htmlFor="price">

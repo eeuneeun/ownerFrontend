@@ -1,32 +1,46 @@
 "use client";
 
 import { useAuthStore } from "@/app/_store/authStore";
+import { useStoreStore } from "@/app/_store/storeStore";
 import { Pagination } from "@mui/material";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 type Toast = {
-  menuId: number;
+  id: number;
   category: string;
   name: string;
-  des: string;
+  desc: string;
   imgUrl: string;
   price: string;
 };
 export default function Toast() {
-  const [list, setList] = useState<Toast[]>([]);
+  const [list, setList] = useState<Toast[]>([
+    {
+      category: "toast",
+      desc: "햄토스트",
+      id: 1,
+      imgUrl: "C://example.toast/ham",
+      name: "햄토스트",
+      price: "6500.00",
+    },
+  ]);
   const { user, accessToken } = useAuthStore();
+  const { storeId } = useStoreStore();
 
   // 데이터 불러오기
   async function getToastList() {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/menu`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/menu/${storeId}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
     const data = await response.json();
-    console.log(data);
+    console.log([data]);
     setList(data);
   }
 
@@ -51,8 +65,8 @@ export default function Toast() {
                 <li key={item.name + index}>
                   <Link
                     href={{
-                      pathname: `./menu/view/${item.menuId}`,
-                      query: { id: item.menuId, ref: "menu" },
+                      pathname: `./menu/view/${item.id}`,
+                      query: { id: item.id, ref: "menu" },
                     }}
                   >
                     <img
@@ -62,7 +76,7 @@ export default function Toast() {
                     <dl>
                       <dt>{item.name}</dt>
                       <dd>{item.price}원</dd>
-                      <dd> {item.des}</dd>
+                      <dd> {item.desc}</dd>
                     </dl>
                   </Link>
                 </li>
