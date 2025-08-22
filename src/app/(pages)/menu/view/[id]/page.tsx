@@ -40,7 +40,7 @@ export default function View() {
     setToast(data[0]);
   };
   const delItem = async () => {
-    const res = await fetch(`http://localhost:8080/menu/${id}`, {
+    const res = await fetch(`http://localhost:4030/menu/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${accessToken}`,
