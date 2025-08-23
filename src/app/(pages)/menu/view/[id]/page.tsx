@@ -71,8 +71,8 @@ export default function View() {
         </dl>
 
         <div className="btn-wrap flex-between">
-          <Link href="../" className="list-btn">
-            목록으로
+          <Link href="../modify" className="list-btn">
+            옵션추가
           </Link>
           <Link
             href={{

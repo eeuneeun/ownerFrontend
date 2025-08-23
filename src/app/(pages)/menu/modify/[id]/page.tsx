@@ -1,5 +1,6 @@
 "use client";
 import { useAuthStore } from "@/app/_store/authStore";
+import AddGroupToMenu from "@/app/components/option/AddGroupToMenu";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -45,7 +46,6 @@ export default function Modify() {
   };
 
   const delItem = async () => {
-    const id = searchParams.get("id");
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/menu/${menuId}`,
       {
@@ -148,8 +148,10 @@ export default function Modify() {
             {...register("imgUrl", { required: true })}
           />
         </label>
-        <input type="submit" />
+        <input type="submit" value="수정" />
       </form>
+
+      <AddGroupToMenu nowMenuId={Number(menuId)} />
     </div>
   );
 }
