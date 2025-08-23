@@ -1,5 +1,6 @@
 "use client";
 import { useAuthStore } from "@/app/_store/authStore";
+import { useStoreStore } from "@/app/_store/storeStore";
 import AddGroupToMenu from "@/app/components/option/AddGroupToMenu";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -12,6 +13,7 @@ type MenuType = {
   desc: string;
   imgUrl: string;
   price: number;
+  menuGroups: [];
 };
 
 export default function Modify() {
@@ -21,9 +23,12 @@ export default function Modify() {
     desc: "",
     imgUrl: "",
     price: 0,
+    menuGroups: [],
   });
 
   const { user, accessToken } = useAuthStore();
+  const { storeId } = useStoreStore();
+
   const router = useRouter();
   const searchParams = useSearchParams();
   const menuId = searchParams.get("id");
@@ -31,7 +36,7 @@ export default function Modify() {
 
   const getItem = async () => {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/menu/${menuId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/menu/${menuId}/store/${storeId}`,
       {
         method: "GET",
         headers: {
@@ -47,7 +52,7 @@ export default function Modify() {
 
   const delItem = async () => {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/menu/${menuId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/menu/${menuId}/store/${storeId}`,
       {
         method: "DELETE",
         headers: {
@@ -150,6 +155,20 @@ export default function Modify() {
         </label>
         <input type="submit" value="수정" />
       </form>
+
+      <div className="add-group">
+        <h3>추가된 그룹</h3>
+        {Array.isArray(menu.menuGroups) &&
+          menu.menuGroups.map((item, idx) => (
+            <>
+              <ul>
+                <li>{item.group.name}</li>
+                <li>{item.group.desc}</li>
+              </ul>
+              <button>삭제</button>
+            </>
+          ))}
+      </div>
 
       <AddGroupToMenu nowMenuId={Number(menuId)} />
     </div>

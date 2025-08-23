@@ -12,7 +12,7 @@ export default function AddGroupToMenu({ nowMenuId }: Props) {
   const [groupArr, setGroupArr] = useState([]);
 
   async function getAllGroups() {
-    const response = await fetch(`http://localhost:4030/group`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/group`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -24,17 +24,25 @@ export default function AddGroupToMenu({ nowMenuId }: Props) {
     setGroupArr(data);
   }
 
-  async function addGroupsToMenu() {
-    const response = await fetch(`http://localhost:4030/group/${nowMenuId}`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-    });
+  async function addGroupsToMenu(nowMenuId: number, nowGroupId: number) {
+    console.log(nowGroupId, nowMenuId);
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/menu/group`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          menuId: nowMenuId,
+          groupId: nowGroupId,
+        }),
+      }
+    );
     const data = await response.json();
     console.log(data);
-    setGroupArr(data);
+    // setGroupArr(data);
   }
 
   useEffect(() => {
@@ -64,6 +72,9 @@ export default function AddGroupToMenu({ nowMenuId }: Props) {
                   </>
                 ))}
               </div>
+              <button onClick={() => addGroupsToMenu(nowMenuId, item.id)}>
+                추가
+              </button>
             </div>
           </>
         ))}

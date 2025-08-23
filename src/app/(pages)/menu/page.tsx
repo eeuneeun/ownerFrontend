@@ -30,7 +30,7 @@ export default function Toast() {
   // 데이터 불러오기
   async function getToastList() {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/menu/${storeId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/menu/store/${storeId}`,
       {
         method: "GET",
         headers: {

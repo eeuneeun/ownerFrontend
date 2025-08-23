@@ -36,13 +36,16 @@ export default function GroupView({}: Props) {
   // 현 페이지의 그룹 정보 가져오기
   async function getNowGroup() {
     const id = Number(groupId);
-    const response = await fetch(`http://localhost:4030/group/${id}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/group/${id}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
     const data = await response.json();
     console.log(data);
     setGroupData(data);
@@ -51,7 +54,7 @@ export default function GroupView({}: Props) {
   // 모든 옵션 리스트 정보 가져오기
   const getAllOptionList = async () => {
     const id = Number(groupId);
-    const response = await fetch(`http://localhost:4030/option`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/option`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${accessToken}`,
