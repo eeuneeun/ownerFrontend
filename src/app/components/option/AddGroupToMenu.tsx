@@ -5,6 +5,8 @@ type Props = {
   nowMenuId: number;
 };
 
+type Group = {};
+
 export default function AddGroupToMenu({ nowMenuId }: Props) {
   const { user, accessToken } = useAuthStore();
   const [groupArr, setGroupArr] = useState([]);
@@ -23,8 +25,8 @@ export default function AddGroupToMenu({ nowMenuId }: Props) {
   }
 
   async function addGroupsToMenu() {
-    const response = await fetch(`http://localhost:4030/group`, {
-      method: "GET",
+    const response = await fetch(`http://localhost:4030/group/${nowMenuId}`, {
+      method: "POST",
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
@@ -44,20 +46,24 @@ export default function AddGroupToMenu({ nowMenuId }: Props) {
       {Array.isArray(groupArr) &&
         groupArr?.map((item, idx) => (
           <>
-            <div>{item?.name}</div>
-            <div>{item?.desc}</div>
-            <div>
-              <h4>옵션</h4>
-              {item?.groupOptions?.map((optionItem, idx) => (
-                <>
-                  <ul>
-                    <li>옵션명 : {optionItem.option.name}</li>
-                    <li>옵션 설명 : {optionItem.option.desc}</li>
-                    <li>가격 : {optionItem.option.price}</li>
-                    <li>수량 : {optionItem.quantity}</li>
-                  </ul>
-                </>
-              ))}
+            <div key={item?.name + idx}>
+              <div>{item?.name}</div>
+              <div>{item?.desc}</div>
+              <div>
+                <h4>옵션</h4>
+                {item?.groupOptions?.map((optionItem, idx) => (
+                  <>
+                    <ul key={optionItem.option.name + idx}>
+                      <li>옵션명 : {optionItem.option.name}</li>
+                      <li>옵션 설명 : {optionItem.option.desc}</li>
+                      <li>
+                        가격 : {Math.floor(Number(optionItem.option.price))}
+                      </li>
+                      <li>수량 : {optionItem.quantity}</li>
+                    </ul>
+                  </>
+                ))}
+              </div>
             </div>
           </>
         ))}

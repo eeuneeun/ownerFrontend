@@ -116,7 +116,8 @@ export default function GroupView({}: Props) {
           {groupData?.groupOptions?.map((item, idx) => (
             <>
               <li>
-                {item.option.name} / {item.option.price} /{item.quantity}
+                {item.option.name} / {Math.floor(item.option.price)} /
+                {item.quantity}
               </li>
             </>
           ))}
@@ -129,7 +130,7 @@ export default function GroupView({}: Props) {
               control={control}
               render={({ field }) => (
                 <>
-                  <div className="select-wrap">
+                  <div className="select-wrap" key={field.name}>
                     <select {...field}>
                       <option value="">옵션을 선택하세요</option>
                       {Array.isArray(optionList) &&

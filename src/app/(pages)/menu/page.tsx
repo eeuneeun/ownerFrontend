@@ -11,7 +11,7 @@ type Toast = {
   name: string;
   desc: string;
   imgUrl: string;
-  price: string;
+  price: number;
 };
 export default function Toast() {
   const [list, setList] = useState<Toast[]>([
@@ -21,7 +21,7 @@ export default function Toast() {
       id: 1,
       imgUrl: "C://example.toast/ham",
       name: "햄토스트",
-      price: "6500.00",
+      price: 6500,
     },
   ]);
   const { user, accessToken } = useAuthStore();
@@ -75,7 +75,7 @@ export default function Toast() {
                     />
                     <dl>
                       <dt>{item.name}</dt>
-                      <dd>{item.price}원</dd>
+                      <dd>{Math.floor(item?.price)}원</dd>
                       <dd> {item.desc}</dd>
                     </dl>
                   </Link>

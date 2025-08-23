@@ -57,7 +57,7 @@ export default function OptionItems({ activetab }: Props) {
               />
               <dl>
                 <dt>{item.name}</dt>
-                <dd>{item.price}원</dd>
+                <dd>{Math.floor(item.price)}원</dd>
                 <dd>{item.desc}</dd>
               </dl>
               <div className="btn-wrap">
