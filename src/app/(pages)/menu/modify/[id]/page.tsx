@@ -50,9 +50,9 @@ export default function Modify() {
     setItems(data);
   };
 
-  const delItem = async () => {
+  const delItem = async (groupId: number) => {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/menu/${menuId}/store/${storeId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/menu/${menuId}/group/${groupId}`,
       {
         method: "DELETE",
         headers: {
@@ -104,7 +104,7 @@ export default function Modify() {
   }, [accessToken]);
 
   return (
-    <div>
+    <div className="menu-modify">
       <h2>토스트 메뉴 수정</h2>
       <form action="post" onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="category">
@@ -161,11 +161,18 @@ export default function Modify() {
         {Array.isArray(menu.menuGroups) &&
           menu.menuGroups.map((item, idx) => (
             <>
-              <ul>
-                <li>{item.group.name}</li>
-                <li>{item.group.desc}</li>
-              </ul>
-              <button>삭제</button>
+              <div className="group-wrap">
+                <ul>
+                  <li>{item.group.name}</li>
+                  <li>{item.group.desc}</li>
+                </ul>
+                <button
+                  onClick={() => delItem(item.group.id)}
+                  className="del-btn"
+                >
+                  X
+                </button>
+              </div>
             </>
           ))}
       </div>

@@ -1,6 +1,7 @@
 "use client";
 import { useAuthStore } from "@/app/_store/authStore";
 import { useStoreStore } from "@/app/_store/storeStore";
+import ImgUploader from "@/app/components/ImgUploader";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -98,16 +99,9 @@ export default function Write({}: ItemContents) {
             {...register("price", { required: true })}
           />
         </label>
-        <label htmlFor="imgUrl">
-          상품 이미지
-          <input
-            type="file"
-            id="imgUrl"
-            {...register("imgUrl", { required: true })}
-          />
-        </label>
         <input type="submit" />
       </form>
+      <ImgUploader />
       <Link href="../nomal">글목록</Link>
     </div>
   );

@@ -684,3 +684,56 @@ button.cancel {
   border-radius: 5px;
   background: #328491;
 }
+
+.group-badge {
+  font-size: 13px;
+  color: #fff;
+  background: #3ea9f0;
+  display: flex;
+  width: fit-content;
+  margin-bottom: 5px;
+  padding: 3px 8px;
+  border-radius: 15px;
+}
+/* menu-modify */
+.menu-modify {
+  width: 100%;
+  padding: 20px;
+}
+.menu-modify form {
+  width: 100%;
+}
+.add-group {
+  width: 100%;
+}
+
+.add-group h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #5d5d5d;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.add-group .group-wrap {
+  width: 100%;
+  border: 1px solid #626262;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  padding: 10px;
+  padding-right: 40px;
+  background: #fff;
+  position: relative;
+}
+.del-btn {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 0;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  margin-top: -10px;
+}

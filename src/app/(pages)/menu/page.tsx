@@ -24,7 +24,7 @@ export default function Toast() {
       price: 6500,
     },
   ]);
-  const { user, accessToken } = useAuthStore();
+  const { accessToken } = useAuthStore();
   const { storeId } = useStoreStore();
 
   // 데이터 불러오기
@@ -78,6 +78,21 @@ export default function Toast() {
                       <dd>{Math.floor(item?.price)}원</dd>
                       <dd> {item.desc}</dd>
                     </dl>
+
+                    {Array.isArray(item.menuGroups) && (
+                      <ul className="width-100">
+                        {item.menuGroups.map((group, idx: number) => (
+                          <li
+                            key={group.group.name + idx}
+                            className="width-100 padding-0"
+                          >
+                            <span className=" group-badge">
+                              {group.group.name}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </Link>
                 </li>
               ))}

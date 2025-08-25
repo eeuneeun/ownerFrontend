@@ -92,7 +92,8 @@ input,
 select:focus-visible,
 select {
   display: flex;
-  width: 300px;
+  width: 100%;
+  min-width: 300px;
   background: #fff;
   border: 0;
   color: #2f2f2f;
@@ -236,6 +237,12 @@ h2 {
   color: #4f4f4f;
 }
 
+.width-100 {
+  width: 100% !important;
+}
+.padding-0 {
+  padding: 0 !important;
+}
 .relative {
   position: relative;
 }

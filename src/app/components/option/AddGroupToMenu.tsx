@@ -42,41 +42,39 @@ export default function AddGroupToMenu({ nowMenuId }: Props) {
     );
     const data = await response.json();
     console.log(data);
-    // setGroupArr(data);
+    data.id !== null && window.location.reload();
   }
 
   useEffect(() => {
     getAllGroups();
   }, []);
   return (
-    <div>
+    <div className="add-group">
       <h3>메뉴에 옵션 그룹 추가</h3>
       {Array.isArray(groupArr) &&
         groupArr?.map((item, idx) => (
-          <>
-            <div key={item?.name + idx}>
-              <div>{item?.name}</div>
-              <div>{item?.desc}</div>
-              <div>
-                <h4>옵션</h4>
-                {item?.groupOptions?.map((optionItem, idx) => (
-                  <>
-                    <ul key={optionItem.option.name + idx}>
-                      <li>옵션명 : {optionItem.option.name}</li>
-                      <li>옵션 설명 : {optionItem.option.desc}</li>
-                      <li>
-                        가격 : {Math.floor(Number(optionItem.option.price))}
-                      </li>
-                      <li>수량 : {optionItem.quantity}</li>
-                    </ul>
-                  </>
-                ))}
-              </div>
-              <button onClick={() => addGroupsToMenu(nowMenuId, item.id)}>
-                추가
-              </button>
+          <div key={item?.desc} className="group-wrap">
+            <div>{item?.name}</div>
+            <div>{item?.desc}</div>
+            <div>
+              <h4>옵션</h4>
+              {item?.groupOptions?.map((optionItem, idx) => (
+                <>
+                  <ul key={optionItem.option.dsec + idx}>
+                    <li>옵션명 : {optionItem.option.name}</li>
+                    <li>옵션 설명 : {optionItem.option.desc}</li>
+                    <li>
+                      가격 : {Math.floor(Number(optionItem.option.price))}
+                    </li>
+                    <li>수량 : {optionItem.quantity}</li>
+                  </ul>
+                </>
+              ))}
             </div>
-          </>
+            <button onClick={() => addGroupsToMenu(nowMenuId, item.id)}>
+              추가
+            </button>
+          </div>
         ))}
     </div>
   );
