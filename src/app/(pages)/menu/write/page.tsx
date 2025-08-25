@@ -1,5 +1,6 @@
 "use client";
 import { useAuthStore } from "@/app/_store/authStore";
+import { useImgStore } from "@/app/_store/imgStore";
 import { useStoreStore } from "@/app/_store/storeStore";
 import ImgUploader from "@/app/components/ImgUploader";
 import Link from "next/link";
@@ -20,6 +21,7 @@ export default function Write({}: ItemContents) {
   const router = useRouter();
   const { user, accessToken } = useAuthStore();
   const { storeId } = useStoreStore();
+  const { path } = useImgStore();
 
   const addItem = async (data: ItemContents) => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/menu`, {
@@ -34,7 +36,7 @@ export default function Write({}: ItemContents) {
         name: data.name,
         desc: data.desc,
         price: data.price,
-        imgUrl: "C://example.toast/ham",
+        imgUrl: path,
       }),
     });
 

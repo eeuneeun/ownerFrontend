@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useImgStore } from "../_store/imgStore";
 
 export default function ImgUploader() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [uploadedUrl, setUploadedUrl] = useState<string | null>(null);
+  const { setImgData } = useImgStore();
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] || null;
@@ -16,9 +18,9 @@ export default function ImgUploader() {
     }
   };
 
-  const handleUpload = async (
+  async function handleUpload(
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  ) {
     event.preventDefault();
     if (!selectedFile) return;
 
@@ -30,19 +32,20 @@ export default function ImgUploader() {
         `${process.env.NEXT_PUBLIC_API_URL}/upload/image`,
         {
           method: "POST",
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
           body: formData,
         }
       );
-      setUploadedUrl(
-        `${process.env.NEXT_PUBLIC_API_URL}${response?.data?.url}`
+      const result = await response.json();
+      setUploadedUrl(`${process.env.NEXT_PUBLIC_API_URL}/${result?.path}`);
+
+      setImgData(
+        result?.filename,
+        `${process.env.NEXT_PUBLIC_API_URL}/${result?.path}`
       );
     } catch (error) {
       console.error("Upload failed:", error);
     }
-  };
+  }
 
   return (
     <div>
@@ -50,7 +53,9 @@ export default function ImgUploader() {
       {previewUrl && (
         <img src={previewUrl} alt="preview" style={{ width: 150 }} />
       )}
-      <button onClick={handleUpload}>Upload</button>
+      <button type="button" onClick={handleUpload}>
+        Upload
+      </button>
       {uploadedUrl && (
         <div>
           <p>Uploaded Image:</p>

@@ -69,7 +69,10 @@ export default function View() {
       <h2>메뉴 상세</h2>
 
       <div className="view-wrap">
-        <img src="/combi.jpg" alt={toast.name} />
+        <img
+          src={`${process.env.NEXT_PUBLIC_API_URL}/uploads/${toast?.imgUrl}`}
+          alt={toast.name}
+        />
         <dl>
           <dt>{toast?.name}</dt>
 

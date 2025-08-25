@@ -70,7 +70,7 @@ export default function Toast() {
                     }}
                   >
                     <img
-                      src="http://localhost:3000/file.svg"
+                      src={`http://localhost:4030/uploads/${item.imgUrl}`}
                       alt="기본 토스트"
                     />
                     <dl>
