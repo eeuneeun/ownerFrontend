@@ -36,11 +36,12 @@ export default function ImgUploader() {
         }
       );
       const result = await response.json();
+
       setUploadedUrl(`${process.env.NEXT_PUBLIC_API_URL}/${result?.path}`);
 
       setImgData(
-        result?.filename,
-        `${process.env.NEXT_PUBLIC_API_URL}/${result?.path}`
+        `${process.env.NEXT_PUBLIC_API_URL}/${result?.path}`,
+        result?.filename
       );
     } catch (error) {
       console.error("Upload failed:", error);

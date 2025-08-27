@@ -2,7 +2,7 @@
 
 import { useAuthStore } from "@/app/_store/authStore";
 import OptionGroups from "@/app/(pages)/group/page";
-import OptionItems from "@/app/(pages)/option/OptionItems";
+import OptionItems from "@/app/components/option/OptionItems";
 import { Pagination } from "@mui/material";
 import Link from "next/link";
 import { useEffect, useState } from "react";

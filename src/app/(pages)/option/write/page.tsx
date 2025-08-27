@@ -1,5 +1,7 @@
 "use client";
 import { useAuthStore } from "@/app/_store/authStore";
+import { useImgStore } from "@/app/_store/imgStore";
+import ImgUploader from "@/app/components/ImgUploader";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -16,6 +18,7 @@ type ItemContents = {
 export default function Write({}: ItemContents) {
   const router = useRouter();
   const { user, accessToken } = useAuthStore();
+  const { path } = useImgStore();
 
   const addItem = async (data: ItemContents) => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/option`, {
@@ -28,7 +31,7 @@ export default function Write({}: ItemContents) {
         name: data.name,
         desc: data.desc,
         price: data.price,
-        imgUrl: "C://example.toast/ham",
+        imgUrl: path,
       }),
     });
 
@@ -92,6 +95,7 @@ export default function Write({}: ItemContents) {
             {...register("imgUrl", { required: true })}
           />
         </label>
+        <ImgUploader />
         <input type="submit" />
       </form>
       <Link href="../nomal">글목록</Link>

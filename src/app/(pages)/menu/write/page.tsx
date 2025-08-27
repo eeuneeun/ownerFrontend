@@ -60,7 +60,9 @@ export default function Write({}: ItemContents) {
     addItem(data);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log(path);
+  }, [path]);
 
   return (
     <div className="write">

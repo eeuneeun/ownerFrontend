@@ -69,10 +69,7 @@ export default function Toast() {
                       query: { id: item.id, ref: "menu" },
                     }}
                   >
-                    <img
-                      src={`http://localhost:4030/uploads/${item.imgUrl}`}
-                      alt="기본 토스트"
-                    />
+                    <img src={item.imgUrl} alt="기본 토스트" />
                     <dl>
                       <dt>{item.name}</dt>
                       <dd>{Math.floor(item?.price)}원</dd>
