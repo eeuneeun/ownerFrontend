@@ -47,10 +47,6 @@ export default function MyPage() {
           </li>
 
           <li>
-            이메일 : {userInfo.email}
-            <button>수정</button>
-          </li>
-          <li>
             <Link href="/mypage/order">주문내역</Link>
           </li>
           <li>

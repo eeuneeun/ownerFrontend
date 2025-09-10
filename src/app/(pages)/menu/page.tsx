@@ -76,9 +76,9 @@ export default function Toast() {
                       <dd> {item.desc}</dd>
                     </dl>
 
-                    {Array.isArray(item.menuGroups) && (
+                    {Array.isArray(item?.menuGroups) && (
                       <ul className="width-100">
-                        {item.menuGroups.map((group, idx: number) => (
+                        {item?.menuGroups.map((group, idx: number) => (
                           <li
                             key={group.group.name + idx}
                             className="width-100 padding-0"
