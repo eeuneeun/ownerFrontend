@@ -35,7 +35,7 @@ export default function Write({}: ItemContents) {
         category: data.category,
         name: data.name,
         desc: data.desc,
-        price: data.price,
+        price: Number(data.price),
         imgUrl: path,
       }),
     });
