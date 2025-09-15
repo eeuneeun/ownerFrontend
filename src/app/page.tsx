@@ -43,7 +43,7 @@ export default function Home() {
 
   async function getAllOrder() {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/order/store/${1}`
+      `${process.env.NEXT_PUBLIC_USER_API_URL}/order/store/${1}`
     );
     const result = await res.json();
     console.log(result);
@@ -52,7 +52,7 @@ export default function Home() {
 
   async function updateOrderStatus(orderId: number, nextStatus: string) {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/order/${orderId}`,
+      `${process.env.NEXT_PUBLIC_USER_API_URL}/order/${orderId}`,
       {
         method: "PATCH",
         headers: {

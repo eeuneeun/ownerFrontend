@@ -22,37 +22,46 @@ export default function Modify() {
 
   const getItem = async () => {
     const id = searchParams.get("id");
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/board/${id}`, {
-      method: "GET",
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_USER_API_URL}/board/${id}`,
+      {
+        method: "GET",
+      }
+    );
     const data = await res.json();
     console.log(data);
     setItems(data);
   };
 
   const delItem = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/board/${id}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_USER_API_URL}/board/${id}`,
+      {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
     console.log(res);
   };
 
   async function updateItem(data: ItemContents) {
     const id = searchParams.get("id");
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/board/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: "eeuneeun", //유저이름
-        title: data.title,
-        contents: data.contents,
-        writeTime: new Date(),
-        like: 0,
-      }),
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_USER_API_URL}/board/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: "eeuneeun", //유저이름
+          title: data.title,
+          contents: data.contents,
+          writeTime: new Date(),
+          like: 0,
+        }),
+      }
+    );
 
     if (!res.ok) throw new Error("업데이트 실패");
     if (res.status == 200) {

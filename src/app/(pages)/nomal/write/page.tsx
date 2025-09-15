@@ -13,7 +13,7 @@ export default function Write({}: ItemContents) {
   const router = useRouter();
 
   const addItem = async (data: ItemContents) => {
-    const res = await fetch("${process.env.NEXT_PUBLIC_API_URL}/board", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_USER_API_URL}/board`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

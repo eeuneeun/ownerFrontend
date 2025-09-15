@@ -21,7 +21,7 @@ export default function View() {
 
   const getItem = async () => {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/board/${id}`,
+      `${process.env.NEXT_PUBLIC_USER_API_URL}/board/${id}`,
       {
         method: "GET",
       }
@@ -30,10 +30,13 @@ export default function View() {
     setArticle(data);
   };
   const delItem = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/board/${id}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_USER_API_URL}/board/${id}`,
+      {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
     if (res.status == 200) {
       router.push("../");
     }
