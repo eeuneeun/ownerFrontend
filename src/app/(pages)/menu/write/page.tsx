@@ -24,8 +24,6 @@ export default function Write({}: ItemContents) {
   const { path } = useImgStore();
 
   const addItem = async (data: ItemContents) => {
-    const tmpStoreId = storeId;
-    console.log(tmpStoreId);
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/menu`, {
       method: "POST",
       headers: {
@@ -33,7 +31,7 @@ export default function Write({}: ItemContents) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        storeId: tmpStoreId ? tmpStoreId : 0,
+        storeId: storeId ? storeId : 0,
         category: data.category,
         name: data.name,
         desc: data.desc,
