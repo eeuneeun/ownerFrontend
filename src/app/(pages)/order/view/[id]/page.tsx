@@ -40,9 +40,12 @@ export default function OrderView({}: Props) {
   });
 
   const getOrder = async () => {
-    const response = await fetch(`http://localhost:4000/order/${id}`, {
-      method: "GET",
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/order/${id}`,
+      {
+        method: "GET",
+      }
+    );
     const data = await response.json();
     console.log(data);
     // const tmp = {

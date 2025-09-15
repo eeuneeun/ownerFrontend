@@ -42,22 +42,27 @@ export default function Home() {
   const [orderArr, setOrderArr] = useState<OrderListItem[]>([]);
 
   async function getAllOrder() {
-    const res = await fetch(`http://localhost:4000/order/store/${1}`);
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/order/store/${1}`
+    );
     const result = await res.json();
     console.log(result);
     setOrderArr(result);
   }
 
   async function updateOrderStatus(orderId: number, nextStatus: string) {
-    const res = await fetch(`http://localhost:4000/order/${orderId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        status: nextStatus,
-      }),
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/order/${orderId}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          status: nextStatus,
+        }),
+      }
+    );
     const result = await res.json();
     console.log(result);
     if ((result.status = nextStatus)) {
